@@ -1,20 +1,25 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import About from "./pages/About";
+import Home from "./pages/Home";
 
-import Navbar from "./components/Navbar";
+
 
 import Wrapper from "./components/Wrapper";
+import { homedir } from "os";
 
 const App = () => (
   <Router>
     <div>
      
       <Wrapper>
-        <Route exact path="/" component={About} />
-        <Route exact path="/about" component={About} /> 
-      </Wrapper>
+        <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/articles" component={Home} />
+        <Route exact path="/saved" component={Home}/> 
+       </Switch>
+       </Wrapper>
+     
  
     </div>
   </Router>
