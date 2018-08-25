@@ -41,18 +41,37 @@ export default class Home extends React.Component {
       topic: "",   
       sYear:"",
       eYear:"",
+      results:[],
     })
   }
 
   handleSaveArticle =index =>{
-
-    API.saveArticle({
+    console.log("click");
+    const articleToSaved = {
       title: this.state.results[index].headline.main,
       url: this.state.results[index].web_url,
       published: this.state.results[index].pub_date,
       summary: this.state.results[index].snippet,
+    }
+    // console log article to saved
+    console.log(articleToSaved);
 
+    // remove article from results[] with position in array=index and only one element (index,1)
+    //https://stackoverflow.com/questions/10325026/javascript-array-slice-versus-delete
+    //http://www.tothenew.com/blog/javascript-splice-vs-slice/
+
+    var newResult= this.state.results;
+
+    newResult.splice(index,1)
+    console.log("index is ",index);
+    console.log("new results",newResult);
+    this.setState({
+      results : newResult
     })
+
+
+
+    API.saveArticle(articleToSaved)
     .then(res=> console.log(res))
     .catch(err => console.log(err))
     
@@ -183,7 +202,7 @@ export default class Home extends React.Component {
                 <p><b>Summary:</b> {article.snippet}</p>
                 <p><b>Date:</b> {article.pub_date}</p>
                
-                <button type="button" class="btn btn-primary" id={i} onclick={()=>this.handleSaveArticle(i)}> Save article </button>
+                <button type="button" className="btn btn-primary" id={i} onClick={()=>this.handleSaveArticle(i)}> Save article </button>
                  <hr/>
                  </li>
             
