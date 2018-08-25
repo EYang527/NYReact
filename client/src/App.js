@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 
 
 import Wrapper from "./components/Wrapper";
-import { homedir } from "os";
+
 
 const App = () => (
   <Router>
