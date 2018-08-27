@@ -1,6 +1,6 @@
 import React from "react";
-
 import Jumbotron from '../components/Jumbotron/Jumbotron'
+import Moment from 'react-moment'; // use moment library to format the date
 
 import NYsearchForm from "../components/NYsearchForm/NYsearchForm";
 import Form from "../components/NYsearchForm/Form";
@@ -8,6 +8,7 @@ import Formgroup from "../components/NYsearchForm/Formgroup";
 import Label from "../components/NYsearchForm/Label";
 import Input from "../components/NYsearchForm/Input";
 import API from "../utils/API"
+
 
 
 export default class Home extends React.Component {
@@ -129,7 +130,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <Jumbotron/>
+        <Jumbotron redirection="/Saved" pageName="Saved Articles"/>
     
         <NYsearchForm>
           <Form>
@@ -200,7 +201,10 @@ export default class Home extends React.Component {
                 <p><b>Title:</b> {article.headline.main}</p>
                 <p><a href={article.web_url}>{article.web_url}</a></p>
                 <p><b>Summary:</b> {article.snippet}</p>
-                <p><b>Date:</b> {article.pub_date}</p>
+                <p><b>Date:</b>    <Moment format="YYYY/MM/DD">{article.pub_date}</Moment>
+               
+                </p>             
+           
                
                 <button type="button" className="btn btn-primary" id={i} onClick={()=>this.handleSaveArticle(i)}> Save article </button>
                  <hr/>
